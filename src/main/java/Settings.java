@@ -1,3 +1,4 @@
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Settings {
 
@@ -38,8 +41,8 @@ public class Settings {
     @Test
     public void testStart(){
         clickElement(By.id("org.wikipedia:id/search_container"));
-//        fillText(By.id("org.wikipedia:id/search_src_text"), "Hello");    /** Для проверки */
-        checkElement(By.id("org.wikipedia:id/search_src_text"));
+//        fillText(By.id("org.wikipedia:id/search_src_text"), "JVM");    /** Для проверки */
+        assertElementHasText(By.id("org.wikipedia:id/search_src_text"), "Search…", "This line does not contain the required text");
     }
 
     public void setWait(By elementBy){
@@ -50,20 +53,17 @@ public class Settings {
         setWait(elementBy);
         driver.findElement(elementBy).click();
     }
-    public void checkElement(By elementBy){
+    public void assertElementHasText(By elementBy, String checkWord, String error_message){
         setWait(elementBy);
         WebElement element = driver.findElement(elementBy);
         String getWord = element.getText();
-        String checkWord = "Search…";
         String yourWord = "Line contain: " + getWord + " word";
-        String error_message = "This line does not contain the required text: Your word is " + getWord;
         System.out.println(yourWord);
         Assertions.assertEquals(checkWord, getWord, error_message);
     }
 
     public void fillText(By elementBy, String text){
         setWait(elementBy);
-//        Assertions.assertTrue(driver.findElement(elementBy).isDisplayed());
         driver.findElement(elementBy).sendKeys(text);
     }
 
