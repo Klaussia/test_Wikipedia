@@ -80,7 +80,7 @@ public class SetPlatform {
         capabilities.setCapability("platformVersion", platformVersionAndroid);
         capabilities.setCapability("appPackage","org.wikipedia");
         capabilities.setCapability("appActivity",".main.MainActivity");
-        File file = new File("src/main/resources/AndroidApp", "org.wikipedia.apk");
+        File file = new File("src/test/resources/AndroidApp", "org.wikipedia.apk");
         capabilities.setCapability("app", file.getAbsolutePath());
         return capabilities;
     }
@@ -89,7 +89,7 @@ public class SetPlatform {
         capabilities.setCapability("deviceName", deviceNameIOS);
         capabilities.setCapability("platformName", PLATFORM_IOS);
         capabilities.setCapability("platformVersion", platformVersionIOS);
-        File file = new File("src/main/resources/iOSApp", "Wikipedia.app");
+        File file = new File("src/test/resources", "Wikipedia.app");
         capabilities.setCapability("app", file.getAbsolutePath());
         return capabilities;
     }

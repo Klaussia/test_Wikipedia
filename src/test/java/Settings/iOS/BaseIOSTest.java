@@ -22,6 +22,8 @@ public class BaseIOSTest extends TestBase {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
+
     protected void setWait(By elementBy){
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(elementBy));
@@ -37,10 +39,6 @@ public class BaseIOSTest extends TestBase {
     protected void clearEntryField(By elementBy){
         setWait(elementBy);
         driver.findElement(elementBy).clear();
-    }
-    protected void elementVisible(By elementBy){
-        setWait(elementBy);
-        driver.findElement(elementBy).isDisplayed();
     }
     protected void assertCountElementsOnPage(By elementBy){
         setWait(elementBy);
@@ -64,9 +62,9 @@ public class BaseIOSTest extends TestBase {
         swipe.addAction(finger.createPointerMove(Duration.ofMillis(500), PointerInput.Origin.viewport(), centerX, (int)endY));
         driver.perform(Arrays.asList(swipe));
     }
-    protected void elementIsDisplayed(By elementBy){
-        setWait(elementBy);
+    protected boolean elementIsDisplayed(By elementBy){
         Assertions.assertTrue(driver.findElement(elementBy).isDisplayed(), "Element not found");
+        return false;
     }
     protected void longTouch(By elementBy) {
         WebElement element = driver.findElement(elementBy);
@@ -102,10 +100,12 @@ public class BaseIOSTest extends TestBase {
     protected void checkVisible(String One, String Two){
         if(testOne(One)){
             Assertions.assertTrue(driver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='"+One+"']")).isDisplayed(), Two + " is not Displayed");
+//            elementIsDisplayed(By.xpath("//XCUIElementTypeStaticText[@name='"+One+"']"));
             System.out.println("Visible only one article: " + One);
         }
         else if(testTwo(Two)){
             Assertions.assertTrue(driver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='"+Two+"']")).isDisplayed(), One + " is Not Displayed");
+//            elementIsDisplayed(By.xpath("//XCUIElementTypeStaticText[@name='"+Two+"']"));
             System.out.println("Visible only one article: " + Two);
         }
 
