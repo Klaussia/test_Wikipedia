@@ -3,14 +3,18 @@ package Settings.SeleniumFramework;
 
 import Tests.MOBILE_WEB.Ex17;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
+
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 public class TestBaseSelenium {
 
@@ -19,6 +23,7 @@ public class TestBaseSelenium {
 
 
     @BeforeEach
+    @Step("Запускаю веб-драйвер и сессию")
     public void setUp(){
         initializeMobileDriver();
         driver.get("https://en.m.wikipedia.org/");
@@ -26,6 +31,7 @@ public class TestBaseSelenium {
 
     }
     @AfterEach
+    @Step("Завершаю веб-драйвер и сессию")
     public void finish(){
         driver.quit();
     }

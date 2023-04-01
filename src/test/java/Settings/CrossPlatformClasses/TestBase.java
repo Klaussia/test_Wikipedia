@@ -1,6 +1,10 @@
 package Settings.CrossPlatformClasses;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.Platform;
+
+import java.io.FileOutputStream;
+import java.util.Properties;
 
 public class TestBase extends SetPlatform {
 

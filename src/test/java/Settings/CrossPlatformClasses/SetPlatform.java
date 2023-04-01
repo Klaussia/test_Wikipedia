@@ -3,10 +3,13 @@ package Settings.CrossPlatformClasses;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
+import java.util.Properties;
 
 public class SetPlatform {
     /** Данные AppiumServer */
@@ -96,6 +99,18 @@ public class SetPlatform {
     private boolean isPlatform(String my_Platform){
         String platform = this.getSystemVar();
         return my_Platform.equals(platform);
+    }
+    private void createAllureProperty(){
+        String path = System.getProperty("allure-results.directory");
+        try {
+            Properties properties = new Properties();
+            FileOutputStream fs = new FileOutputStream(path+"/environment.propierties");
+            properties.setProperty("Environment", SetPlatform.getInstance().getSystemVar());
+            properties.store(fs,"");
+            fs.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     private String getSystemVar(){
         return System.getenv("PLATFORM");
